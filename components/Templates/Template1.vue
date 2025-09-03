@@ -1,7 +1,6 @@
 <template>
   <div
     v-if="resumeDataForEditing"
-    ref="resumeblock"
     class="flex min-h-[inherit] bg-white sticky text-black font-sans"
   >
     <div

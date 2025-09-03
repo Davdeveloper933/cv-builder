@@ -12,6 +12,7 @@ import type { EditorFields } from '~/types/editor'
 // export const isWatching = ref<boolean>(false)
 // export const historyId = ref(1)
 // export const historyClone = ref<any[]>([])
+export const editorInstance = ref(null)
 export const cvref = ref<HTMLElement | null>(null)
 export const useIndex = () => useStorage('templateIndex', 0)
 export const useHistory = () => useStorage<Array<any>>('history', [])

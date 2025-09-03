@@ -1,5 +1,5 @@
 <template>
-  <section class="mx-auto md:container md:px-4" v-if="resumeData">
+  <section class="" v-if="resumeData">
     <div class="relative">
       <EditorHeader
         :el="cvref"
@@ -8,8 +8,9 @@
         :reset-resume="resetResume"
         :reset-settings="resetSettings"
       />
-
-      <slot />
+      <div class="lg:mx-auto lg:container">
+        <slot />
+      </div>
     </div>
   </section>
 </template>

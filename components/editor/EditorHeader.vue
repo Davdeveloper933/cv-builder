@@ -57,9 +57,7 @@ const getCurrentTemplateComponent = () => {
 const previewSrc = ref('')
 
 const pdfUrl = ref('')
-const pdfDoc: any = ref(null)
-const pageNum = ref(1)
-const scale = ref(1.0)
+
 const canvasRef = ref<HTMLCanvasElement | null>(null)
 
 const loadPdf = async () => {
@@ -89,21 +87,6 @@ const loadPdf = async () => {
   await page.render({ canvasContext: ctx, viewport }).promise
 }
 
-const previewPDF = async () => {
-  if (!props.el) return
-
-  const opt = {
-    html2canvas: { scale: 4 },
-    jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' },
-  }
-
-  // Создаём worker, но не вызываем .save() или .outputPdf()
-  const worker = window.html2pdf().set(opt).from(props.el)
-
-  // Получаем blob
-  const pdfBlob = await worker.outputPdf('blob')
-  pdfUrl.value = URL.createObjectURL(pdfBlob)
-}
 const openModalTakeScreenShot = async () => {
   openModal()
   await loadPdf()
@@ -111,7 +94,7 @@ const openModalTakeScreenShot = async () => {
 </script>
 
 <template>
-  <div class="editor-header px-4 md:px-0">
+  <div class="" style="background: #ebeefb">
     <Dialog :is-open-prop="isOpenPanel" :close-panel="closePanel">
       <div class="space-y-4">
         <div
@@ -132,20 +115,12 @@ const openModalTakeScreenShot = async () => {
       :openModal="openModal"
     >
       <div class="w-full p-3">
-        <!--        -mt-9-->
-        <!--        <iframe-->
-        <!--          :src="pdfUrl"-->
-        <!--          class="w-full iframe"-->
-        <!--          style="min-height: 100vh"-->
-        <!--          title="PDF Preview"-->
-        <!--        ></iframe>-->
         <canvas ref="canvasRef" style="width: 100%; height: auto"></canvas>
       </div>
     </Modal>
 
     <div
-      style="background: #ebeefb"
-      class="sticky z-35 w-full top-0 lg:flex lg:items-center lg:justify-between space-y-2 editor-header py-4 items-center gap-x-4"
+      class="sticky lg:mx-auto lg:container z-35 w-full top-0 lg:flex lg:items-center lg:justify-between space-y-2 editor-header py-4 px-4 items-center gap-x-4"
     >
       <div class="flex gap-y-2 gap-x-2 min-w-0 flex-1">
         <DownloadPDF class="text-xs md:text-base sm:text-sm" :el="el" />
@@ -163,7 +138,7 @@ const openModalTakeScreenShot = async () => {
         </div>
         <button
           @click="openModalTakeScreenShot"
-          class="flex justify-center items-center md:gap-3 gap-1 px-3 md:px-6 md:py-2 py-1 rounded-xl bg-gradient-to-r bg-gray-800 text-white transition-colors router-link-active router-link-exact-active hover:bg-gray-900 active:bg-gray-900 active:text-white/80"
+          class="flex md:hidden justify-center items-center md:gap-3 gap-1 px-3 md:px-6 md:py-2 py-1 rounded-xl bg-gradient-to-r bg-gray-800 text-white transition-colors router-link-active router-link-exact-active hover:bg-gray-900 active:bg-gray-900 active:text-white/80"
         >
           <span
             class="font-semibold hidden sm:block tracking-wide text-xs md:text-base sm:text-sm"

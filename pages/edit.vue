@@ -5,33 +5,33 @@
     :template="originalTemplate"
     :resume-data="templateResume"
   >
-    <div class="flex md:pt-6 bg-white relative">
-      <div class="md:w-1/3 w-full px-2" v-if="templateResume">
+    <div class="grid grid-cols-3 md:pt-6 bg-white relative">
+      <div class="col-span-3 md:col-span-1 px-2" v-if="templateResume">
         <ResumeEditor
           :resume-data="templateResume"
           :template="originalTemplate"
           :reset="resetResume"
         />
       </div>
-      <div class="hidden lg:block">
+      <div class="hidden md:col-span-1 md:block">
         <div class="border-gray-800">
-          <div ref="cvref">
-            <ClientOnly>
-              <ResumeWrapper>
-                <component
-                  :is="TEMPLATES[selectedIndex].component"
-                  :resumeDataForEditing="templateResume"
-                  ref="templateRef"
-                  class=""
-                  id="preview"
-                />
-              </ResumeWrapper>
-            </ClientOnly>
+          <div
+            ref="cvref"
+            class="md:origin-top lg:scale-[.7] xl:scale-[1] md:scale-[.5]"
+          >
+            <ResumeWrapper>
+              <component
+                :is="TEMPLATES[selectedIndex].component"
+                :resumeDataForEditing="templateResume"
+                class=""
+                id="preview"
+              />
+            </ResumeWrapper>
           </div>
         </div>
       </div>
+      <!--      <PreviewCanvas :cvref="cvref" :resume-data="templateResume" />-->
     </div>
-    <!--    </template>-->
   </ResumeEditorLayout>
 </template>
 
@@ -52,10 +52,10 @@ const { templateResume, resetSettings, resetResume, originalTemplate } =
 
 watch(
   () => templateResume.value,
-  (newValue) => {
+  async (newValue) => {
     setCurrent(newValue)
   },
-  { deep: true },
+  { deep: true, immediate: true },
 )
 </script>
 

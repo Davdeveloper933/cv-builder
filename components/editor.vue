@@ -11,13 +11,13 @@
 </template>
 <script setup>
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
+import { editorInstance } from '~/composables/states'
 import '@ckeditor/ckeditor5-build-classic/build/translations/ru'
 import cloneDeep from 'lodash-es/cloneDeep.js'
 
 const { push, isWatching } = useHistoryFunctions()
 const props = defineProps(['modelValue', 'isReadOnly', 'id', 'resumeData'])
 const emit = defineEmits(['update:modelValue'])
-const editorInstance = ref(null)
 const readOnly = ref(false)
 let toolbarOptions = ref([
   'undo',
@@ -34,15 +34,8 @@ let toolbarOptions = ref([
   'outdent',
   'indent',
 ])
-const toolbar = ref(toolbarOptions)
 let oldModelValue = cloneDeep(props.modelValue)
 let newValue = cloneDeep(props.modelValue)
-let didPush = false
-
-const initHistory = () => {
-  // const resumeDataDeepCopy = cloneDeep(resumeData.value)
-  // push(resumeDataDeepCopy)
-}
 
 const editorConfig = ref({
   language: 'ru',
