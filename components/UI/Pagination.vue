@@ -102,16 +102,20 @@
   </div>
 </template>
 <script setup lang="ts">
-defineProps([
-  'data',
-  'paginatedData',
-  'perPage',
-  'page',
-  'nextPage',
-  'backPage',
-  'goToPage',
-  'countPages',
-])
+import { ref } from 'vue'
+
+interface Props {
+  data: unknown[]
+  paginatedData: unknown[]
+  perPage: number
+  page: number
+  nextPage: () => void
+  backPage: () => void
+  goToPage: (num: number) => void
+  countPages: number[]
+}
+
+defineProps<Props>()
 
 const currentPageClass = ref(
   'z-10 bg-indigo-600 text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600',

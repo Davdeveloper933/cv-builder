@@ -33,7 +33,7 @@ const props = defineProps<{
   resumeData: ResumeData
 }>()
 
-const { push, current } = useHistoryFunctions()
+const { push } = useHistory()
 
 const onChangeLayout = (): void => {
   push(props.resumeData)

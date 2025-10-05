@@ -56,7 +56,7 @@
     ├── editor/                   # Dynamic input fields
     
     composables/
-    ├── useHistoryFunctions.ts    # History tracking
+    ├── useHistory.ts    # History tracking
     ├── useEditor.ts              # Editor state logic
     
     assets/

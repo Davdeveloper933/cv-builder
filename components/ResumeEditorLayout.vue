@@ -19,18 +19,23 @@
 import { TEMPLATES } from '~/utils/constants'
 import EditorHeader from '~/components/editor/EditorHeader.vue'
 import type { ResumeData } from '~/types'
+import { useCVState } from '~/data/useCVState'
 
-const props = defineProps<{
-  useCVTemplate: Function
+interface Props {
+  useCVTemplate: () => {
+    originalTemplate: ResumeData
+    resetResume: (data: ResumeData, isCustom?: boolean) => void
+    resetSettings: () => void
+  }
   template: ResumeData
   resumeData: ResumeData
   el: HTMLElement | null
-}>()
+}
 
-const { resetHistory } = useHistoryFunctions()
+const props = defineProps<Props>()
 
-const { originalTemplate, resetResume, resetSettings } = props.useCVTemplate()
-const route = useRoute()
+const { resetResume, resetSettings } = props.useCVTemplate()
+const { cvref } = useCVState()
 </script>
 
 <style>

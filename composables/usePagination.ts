@@ -1,6 +1,6 @@
 import type { Template } from '~/types'
 
-export default function usePagination(data: Array<Template>, perPage: number) {
+export default function usePagination(data: Template[], perPage: number) {
   const page = ref(1)
   const countPages = Math.ceil(data.length / perPage)
 

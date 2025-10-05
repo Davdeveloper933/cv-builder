@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import useEditor from '~/composables/useEditor'
-import Editor from '~/components/editor.vue'
+import Editor from '~/components/Editor.vue'
 import type {
   CustomSections,
   EducationSection,
@@ -13,8 +13,9 @@ import DateRange from '~/components/UI/DateRange.vue'
 import InputLegend from '~/components/UI/InputLegend.vue'
 import EditSectionLabel from '~/components/editor/EditSectionLabel.vue'
 import type { ResumeData } from '~/types'
+import { useCVState } from '~/data/useCVState'
 
-const props = defineProps<{
+defineProps<{
   contentList?: LabelContent
   profile?: Profile
   experience?: ExperienceSection
@@ -28,11 +29,12 @@ const props = defineProps<{
 const {
   removeSectionItem,
   addNewAnySection,
-  emptySectionFields,
   listInputModels,
   addNewSectionListItem,
   removeCustomSectionItem,
 } = useEditor()
+
+const { emptyFields } = useCVState()
 </script>
 
 <template>
@@ -116,9 +118,7 @@ const {
       <EditSectionLabel v-model:label="experience.label" />
       <button
         class="px-4 py-2 bg-blue-600 text-white rounded-lg uppercase text-xs md:text-sm mb-4 hover:bg-blue-700 transition"
-        @click="
-          addNewAnySection(experience.list, 'experience', emptySectionFields)
-        "
+        @click="addNewAnySection(experience.list, 'experience', emptyFields)"
       >
         Add new experience section
       </button>
@@ -158,13 +158,14 @@ const {
               :resume-data="resumeData"
             />
           </ClientOnly>
-
-          <button
-            class="w-full px-4 py-2 bg-red-600 text-white rounded-lg uppercase text-xs md:text-sm hover:bg-red-700 transition"
-            @click="removeSectionItem(experience.list, i)"
-          >
-            Delete this Section
-          </button>
+          <div class="flex justify-center">
+            <button
+              class="px-4 py-2 bg-red-600 text-white rounded-lg uppercase text-xs md:text-sm hover:bg-red-700 transition"
+              @click="removeSectionItem(experience.list, i)"
+            >
+              Delete this Section
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -174,9 +175,7 @@ const {
       <EditSectionLabel v-model:label="education.label" />
       <button
         class="px-4 py-2 bg-blue-600 text-white rounded-lg uppercase text-xs md:text-sm mb-4 hover:bg-blue-700 transition"
-        @click="
-          addNewAnySection(education.list, 'education', emptySectionFields)
-        "
+        @click="addNewAnySection(education.list, 'education', emptyFields)"
       >
         Add new education section
       </button>
@@ -201,13 +200,14 @@ const {
             placeholder="Location"
             type="text"
           />
-
-          <button
-            class="w-full px-4 py-2 bg-red-600 text-white rounded-lg uppercase text-xs md:text-sm hover:bg-red-700 transition"
-            @click="removeSectionItem(education.list, i)"
-          >
-            Delete this
-          </button>
+          <div class="flex justify-center">
+            <button
+              class="px-4 py-2 bg-red-600 text-white rounded-lg uppercase text-xs md:text-sm hover:bg-red-700 transition"
+              @click="removeSectionItem(education.list, i)"
+            >
+              Delete this
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -220,11 +220,7 @@ const {
         <button
           class="px-4 py-2 bg-blue-600 text-white rounded-lg uppercase text-xs md:text-sm mb-4 hover:bg-blue-700 transition"
           @click="
-            addNewAnySection(
-              leftColumnList,
-              'customSection',
-              emptySectionFields,
-            )
+            addNewAnySection(leftColumnList, 'customSection', emptyFields)
           "
         >
           ADD NEW SECTION
@@ -276,11 +272,7 @@ const {
         <button
           class="px-4 py-2 bg-blue-600 text-white rounded-lg uppercase text-xs md:text-sm mb-4 hover:bg-blue-700 transition"
           @click="
-            addNewAnySection(
-              customSectionList,
-              'customSection',
-              emptySectionFields,
-            )
+            addNewAnySection(customSectionList, 'customSection', emptyFields)
           "
         >
           ADD NEW custom SECTION

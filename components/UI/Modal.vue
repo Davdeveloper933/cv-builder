@@ -1,14 +1,6 @@
 <template>
-  <!--  <div-->
-  <!--    @click="openModal"-->
-  <!--    class="w-full transition invisible cursor-pointer flex justify-center items-center opacity-50 h-full z-10 absolute bg-gray-800 group/template group-hover/template:visible"-->
-  <!--  >-->
-  <!--    <i class="material-icons" style="font-size: 48px; color: white"-->
-  <!--      >visibility</i-->
-  <!--    >-->
-  <!--  </div>-->
   <TransitionRoot appear :show="isOpen" as="template">
-    <Dialog as="div" @close="closeModal" class="relative z-10">
+    <Dialog as="div" class="relative z-10">
       <TransitionChild
         as="template"
         enter="duration-300 ease-out"
@@ -23,6 +15,7 @@
 
       <div class="fixed inset-0 overflow-y-auto">
         <div
+          @click="closeModal"
           class="flex min-h-full relative z-40 items-center justify-center p-4 text-center"
         >
           <TransitionChild
@@ -54,26 +47,15 @@ import {
   TransitionChild,
   TransitionRoot,
 } from '@headlessui/vue'
-// import { useTemplatePicker } from '~/composables/useCVstate.js'
-// import { TEMPLATES } from '~/utils/constants'
-//
-// const { selectTemplate } = useTemplatePicker(TEMPLATES)
 
-// defineProps(['isOpen', 'closeModal', 'openModal'])
-const props = withDefaults(
-  defineProps<{
-    maxWidth: string
-    isOpen: boolean
-    closeModal: Function
-    openModal: Function
-  }>(),
-  {
-    maxWidth: 'sm',
-  },
-)
+interface Props {
+  maxWidth?: string
+  isOpen: boolean
+  closeModal: () => void
+  openModal: () => void
+}
 
-// const customize = () => {
-//   selectTemplate(props.selectedIndex)
-//   closeModal()
-// }
+withDefaults(defineProps<Props>(), {
+  maxWidth: 'sm',
+})
 </script>

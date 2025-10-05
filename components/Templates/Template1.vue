@@ -181,7 +181,7 @@
 </template>
 
 <script lang="ts" setup>
-import Editor from '~/components/editor.vue'
+import Editor from '~/components/Editor.vue'
 import type { ResumeData } from '~/types'
 
 defineProps<{

@@ -2,12 +2,12 @@
 import {
   useCustomTemplatePicker,
   useTemplatePicker,
-} from '~/composables/useCVstate'
+} from '~/composables/useCVTemplate'
 
 const route = useRoute()
 const isCustomTemplate = computed(() => route.fullPath === '/edit-custom')
 const { selectCustomTemplate } = useCustomTemplatePicker()
-const { selectTemplate, selectedIndex } = useTemplatePicker(TEMPLATES)
+const { selectTemplate, templateIndex } = useTemplatePicker(TEMPLATES)
 const isOpen = ref(false)
 
 const toggleMenu = () => {
@@ -19,7 +19,7 @@ const toggleMenu = () => {
   <header>
     <nav class="bg-white">
       <div
-        class="mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex justify-between py-8"
+        class="mx-auto container px-4 sm:px-6 lg:px-8 relative z-10 flex justify-between py-8"
       >
         <div class="relative z-10 flex items-center gap-16">
           <NuxtLink aria-label="Home" to="/"
@@ -30,14 +30,6 @@ const toggleMenu = () => {
               to="/templates"
               class="relative -mx-3 -my-2 rounded-lg px-3 py-2 text-sm text-gray-700 transition-colors delay-150 hover:text-gray-900 hover:delay-0"
               ><span class="relative z-10">Templates</span></NuxtLink
-            >
-            <NuxtLink
-              to="/edit-custom"
-              class="relative -mx-3 -my-2 rounded-lg px-3 py-2 text-sm text-gray-700 transition-colors delay-150 hover:text-gray-900 hover:delay-0"
-              ><span class="relative z-10">
-                <!--              @click="selectCustomTemplate(!isCustomTemplate)"-->
-                Build Resume from Scratch</span
-              ></NuxtLink
             >
           </div>
         </div>
@@ -111,15 +103,6 @@ const toggleMenu = () => {
                   data-open=""
                   data-active=""
                   >Templates</NuxtLink
-                ><NuxtLink
-                  class="block text-base/7 tracking-tight text-gray-700"
-                  data-headlessui-state="open active"
-                  data-open=""
-                  data-active=""
-                  to="/edit-custom"
-                >
-                  <!--                @click="selectCustomTemplate(!isCustomTemplate)"-->
-                  Build Resume from Scratch</NuxtLink
                 >
               </div>
               <div class="mt-8 flex flex-col gap-4">
@@ -127,23 +110,22 @@ const toggleMenu = () => {
                   class="inline-flex justify-center rounded-lg py-2 px-3 text-sm font-semibold transition-colors bg-gray-800 text-white hover:bg-gray-900 active:bg-gray-800 active:text-white/80"
                   variant="solid"
                   color="gray"
-                  to="/edit"
+                  to="/try-free"
                 >
-                  <!--                  @click="selectTemplate(selectedIndex, !isCustomTemplate)"-->
-                  Try for free</NuxtLink
-                >
+                  Try for free
+                </NuxtLink>
               </div>
             </div>
             <!-- v-if -->
           </div>
           <div class="flex items-center gap-6 max-md:hidden">
             <NuxtLink
-              to="/edit"
+              to="/try-free"
               class="inline-flex justify-center rounded-lg py-2 px-3 text-sm font-semibold transition-colors bg-gray-800 text-white hover:bg-gray-900 active:bg-gray-800 active:text-white/80"
               variant="solid"
               color="gray"
             >
-              <!--              @click="selectTemplate(selectedIndex, !isCustomTemplate)"-->
+              <!--              @click="selectTemplate(templateIndex, !isCustomTemplate)"-->
               Try for free</NuxtLink
             >
           </div>

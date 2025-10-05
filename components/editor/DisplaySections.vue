@@ -3,7 +3,7 @@
     <h3 class="text-sm sm:text-base font-bold mb-2 uppercase">
       Display Sections
     </h3>
-    <div class="grid grid-cols-2 gap-y-3">
+    <div class="flex flex-wrap gap-3">
       <div
         v-for="item in CHECKBOX_ITEMS"
         :key="item.value"
@@ -36,7 +36,7 @@ const props = defineProps<{
   resumeData: ResumeData
 }>()
 
-const { push, current } = useHistoryFunctions()
+const { push } = useHistory()
 
 const selectedSections: ComputedRef<string[]> = computed(() => {
   return Object.keys(props.resumeData).filter(

@@ -2,7 +2,7 @@ import { ref } from 'vue'
 
 export default function useModal() {
   const isOpen = ref(false)
-  const isOpenPanel = ref(true)
+  const isOpenPanel = ref(false)
 
   function closeModal() {
     isOpen.value = false

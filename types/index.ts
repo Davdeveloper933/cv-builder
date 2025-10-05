@@ -5,7 +5,6 @@ import type {
   EducationSection,
   ExperienceItem,
   ExperienceSection,
-  History,
   LabelContent,
   Languages,
   LeftColumnSectionItem,
@@ -36,7 +35,7 @@ export interface ResumeItem {
 }
 
 export interface ResumeData {
-  id: string
+  id: string | number
   themeColor: string
   profileImage?: string
   name: string

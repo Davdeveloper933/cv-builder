@@ -1,11 +1,19 @@
 <script setup lang="ts">
-const props = defineProps(['el'])
+import type { Ref } from 'vue'
+
+interface Props {
+  el: HTMLElement | Ref<HTMLElement | null>
+}
+
+const props = defineProps<Props>()
+
 const downloadPDF = () => {
   const element = props.el
   if (!element) return
 
   const opt = {
     margin: 0,
+    filename: 'myResume.pdf',
     html2canvas: {
       scale: 2,
     },
@@ -30,5 +38,3 @@ const downloadPDF = () => {
     </button>
   </div>
 </template>
-
-<style scoped></style>

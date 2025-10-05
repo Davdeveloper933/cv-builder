@@ -1,18 +1,20 @@
 import type { ResumeData, Template } from '~/types'
 import { useStorage } from '@vueuse/core'
 import { transformResumeDataContent } from '~/utils/helpers'
-import useHistoryFunctions from '~/composables/useHistoryFunctions'
+import useHistory from '~/composables/useHistory'
 import { customTemplate } from '~/data/cv-settings'
 import { COLORS, TEMPLATES } from '~/utils/constants'
 import cloneDeep from 'lodash-es/cloneDeep'
+import { useCVState } from '~/data/useCVState'
 
 export function useCVTemplate() {
-  const { history, resetHistory, push, setCurrent } = useHistoryFunctions()
-  const { changeColor } = useEditor()
-  const selectedIndex = useIndex() //
+  const { resetHistory, push, setCurrent } = useHistory()
+  const { history } = useCVState()
+  const { changeColor } = useThemeColor()
+  const { templateIndex } = useCVState()
 
   const originalTemplate = transformResumeDataContent(
-    cloneDeep(TEMPLATES[selectedIndex.value].data),
+    cloneDeep(TEMPLATES[templateIndex.value].data),
   )
   const defaultCustomTemplate = transformResumeDataContent(
     cloneDeep(customTemplate),
@@ -24,7 +26,7 @@ export function useCVTemplate() {
   )
   const templateResume = useStorage(
     'templateResume',
-    transformResumeDataContent(TEMPLATES[selectedIndex.value].data),
+    transformResumeDataContent(TEMPLATES[templateIndex.value].data),
   )
 
   const resetResume = (template: ResumeData, isCustomTemplate: boolean) => {
@@ -47,9 +49,9 @@ export function useCVTemplate() {
     resetHistory()
     reset(resumeData, isCustomTemplate)
     changeColor(COLORS[0], resumeData)
-    // if (!history.value.length) {
-    //   push(resumeData)
-    // }
+    if (!history.value.length) {
+      push(resumeData)
+    }
     setCurrent(resumeData)
   }
 
@@ -64,23 +66,23 @@ export function useCVTemplate() {
 }
 
 export function useTemplatePicker(templates: Template[]) {
-  const selectedIndex = useIndex() //
-  const { resetResume, resetSettings } = useCVTemplate()
-  const { resetHistory } = useHistoryFunctions()
+  const { templateIndex } = useCVState()
+  const { resetResume } = useCVTemplate()
+  const { resetHistory } = useHistory()
 
   const selectTemplate = async (index: number, isCustomTemplate: boolean) => {
-    selectedIndex.value = index
+    templateIndex.value = index
     resetHistory()
-    resetResume(templates[index].data, isCustomTemplate)
+    resetResume(templates[templateIndex.value].data, isCustomTemplate)
     await navigateTo('/edit')
   }
 
-  return { selectTemplate, selectedIndex }
+  return { selectTemplate, templateIndex }
 }
 
 export function useCustomTemplatePicker() {
   const { resetResume } = useCVTemplate()
-  const { resetHistory } = useHistoryFunctions()
+  const { resetHistory } = useHistory()
   const selectCustomTemplate = (isCustomTemplate: boolean) => {
     resetHistory()
     resetResume(customTemplate, isCustomTemplate)

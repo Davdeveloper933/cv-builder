@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
+import { useCVState } from '~/data/useCVState'
 
-const { push, current } = useHistoryFunctions()
+const { push } = useHistory()
+const { current } = useCVState()
 const props = defineProps<{ label: string }>()
 const emit = defineEmits<{ (e: 'update:label', value: string): void }>()
 

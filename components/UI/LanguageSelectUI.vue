@@ -7,7 +7,7 @@
       @focus="isVisible = !isVisible"
       v-model="searchQuery"
       class="search-input md:text-sm text-xs border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 transition rounded-md"
-      placeholder="Search..."
+      placeholder="Choose languages..."
       type="text"
     />
 
@@ -50,21 +50,22 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, ref } from 'vue'
+import { computed, onMounted, onUnmounted, ref } from 'vue'
+import { useCVState } from '~/data/useCVState'
 
-type Language = {
+interface Language {
   lang: string
   level: string
 }
 
-const props = defineProps({
-  languages: {
-    type: Array<Language>,
-    default: [],
-  },
-})
+interface Props {
+  languages: Language[]
+}
 
-const { push, current } = useHistoryFunctions()
+const props = defineProps<Props>()
+
+const { push } = useHistory()
+const { current } = useCVState()
 const selected = ref<string[]>([])
 const isVisible = ref(false)
 const languagesOptions = ref([
@@ -124,7 +125,6 @@ onUnmounted(() => {
   document.removeEventListener('mousedown', handleClickOutside)
 })
 </script>
-
 <style scoped>
 .search-input {
   width: 100%;

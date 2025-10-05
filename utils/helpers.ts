@@ -1,34 +1,14 @@
 import type { ResumeData, ResumeItem, ResumeSection } from '~/types'
 
-const testingObject1 = {
-  tag: 'p',
-  content: [
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-  ],
-}
+export const formatDate = (input: string | Date): string => {
+  const d = input instanceof Date ? input : new Date(input)
+  if (isNaN(d.getTime())) return ''
 
-const testingObject2 = {
-  tag: 'ul',
-  content: [
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-  ],
-}
-
-const testingObject3 = {
-  tag: 'ol',
-  content: [
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-  ],
-}
-
-export const formatDate = (dateString: string | Date | undefined) => {
-  if (!dateString) return ``
-  const date = new Date(dateString)
-  if (isNaN(date.getTime())) return ``
-  return `${date.toLocaleString('en-US', { month: 'short' })} ${date.getFullYear()}`
+  return d.toLocaleDateString('en-GB', {
+    day: '2-digit',
+    month: 'short',
+    year: 'numeric',
+  })
 }
 
 export const htmlFromArray = (arr: string[] | undefined) => {
@@ -50,10 +30,6 @@ export const htmlFromContent = (
   }
   return ''
 }
-
-console.log(htmlFromContent(testingObject1))
-console.log(htmlFromContent(testingObject2))
-console.log(htmlFromContent(testingObject3))
 
 export const transformResumeDataContent = (
   data: ResumeData | undefined,
@@ -93,4 +69,29 @@ export const transformResumeDataContent = (
     }
   })
   return transformed as ResumeData
+}
+
+export const compressImage = (
+  dataUrl: string,
+  quality = 0.7,
+): Promise<string> => {
+  return new Promise((resolve, reject) => {
+    const img = new Image()
+    img.onload = () => {
+      const canvas = document.createElement('canvas')
+      // например, оставляем исходные размеры:
+      canvas.width = img.width
+      canvas.height = img.height
+
+      const ctx = canvas.getContext('2d')
+      if (!ctx) return reject(new Error('No 2d context'))
+      ctx.drawImage(img, 0, 0)
+
+      // quality от 0 до 1, лучше 0.6–0.8 для баланса
+      const compressed = canvas.toDataURL('image/jpeg', quality)
+      resolve(compressed)
+    }
+    img.onerror = reject
+    img.src = dataUrl
+  })
 }

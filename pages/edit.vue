@@ -15,44 +15,46 @@
       </div>
       <div class="hidden md:col-span-1 md:block">
         <div class="border-gray-800">
-          <div
-            ref="cvref"
-            class="md:origin-top lg:scale-[.7] xl:scale-[1] md:scale-[.5]"
-          >
-            <ResumeWrapper>
-              <component
-                :is="TEMPLATES[selectedIndex].component"
-                :resumeDataForEditing="templateResume"
-                class=""
-                id="preview"
-              />
-            </ResumeWrapper>
+          <div class="md:origin-top lg:scale-[.7] xl:scale-[1] md:scale-[.5]">
+            <div ref="cvref">
+              <ResumeWrapper
+                :height-class="'h-full'"
+                :max-height-class="'max-h-full'"
+              >
+                <component
+                  :is="TEMPLATES[templateIndex].component"
+                  :resumeDataForEditing="templateResume"
+                  class=""
+                  id="preview"
+                />
+              </ResumeWrapper>
+            </div>
           </div>
         </div>
       </div>
-      <!--      <PreviewCanvas :cvref="cvref" :resume-data="templateResume" />-->
     </div>
   </ResumeEditorLayout>
 </template>
 
 <script lang="ts" setup>
 import { TEMPLATES } from '~/utils/constants'
-import { cvref, useIndex } from '~/composables/states'
-import { useCVTemplate } from '~/composables/useCVstate'
+import { useCVTemplate } from '~/composables/useCVTemplate'
 import ResumeEditorLayout from '~/components/ResumeEditorLayout.vue'
+import { useCVState } from '~/data/useCVState'
 
 definePageMeta({
   layout: 'edit',
 })
-const selectedIndex = useIndex()
-const { resetHistory, history, setCurrent } = useHistoryFunctions()
+const { templateIndex } = useCVState()
+const { setCurrent } = useHistory()
+const { cvref } = useCVState()
 
 const { templateResume, resetSettings, resetResume, originalTemplate } =
   useCVTemplate()
 
 watch(
   () => templateResume.value,
-  async (newValue) => {
+  (newValue) => {
     setCurrent(newValue)
   },
   { deep: true, immediate: true },

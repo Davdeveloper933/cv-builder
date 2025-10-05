@@ -9,10 +9,9 @@
           :openModal="openModal"
         >
           <TemplatePreview
-            :src="paginatedData[selectedIndex]?.img"
-            :selected-index="selectedIndex"
+            :src="paginatedData[selectedIndex].img"
+            :selected-index="templateIndex"
             :close-modal="closeModal"
-            :isOpen="isOpen"
           />
         </Modal>
         <div
@@ -21,7 +20,7 @@
           :key="tmpl.data.id"
         >
           <div
-            @click="openCurrentTemplate(Number(tmpl.data.id))"
+            @click="openCurrentTemplate(index, Number(tmpl.data.id))"
             class="w-full transition invisible cursor-pointer flex justify-center items-center opacity-50 h-full z-10 absolute bg-gray-800 group/template group-hover/template:visible"
           >
             <i class="material-icons" style="font-size: 48px; color: white"
@@ -46,19 +45,23 @@
 </template>
 
 <script lang="ts" setup>
+import { ref } from 'vue'
 import { TEMPLATES } from '~/utils/constants'
 import Pagination from '~/components/UI/Pagination.vue'
 import usePagination from '~/composables/usePagination'
 import Modal from '~/components/UI/Modal.vue'
 import useModal from '~/composables/useModal'
+import { useCVState } from '~/data/useCVState'
 
 const { isOpen, openModal, closeModal } = useModal()
 const perPage = 3
-const selectedIndex = useIndex()
+const { templateIndex } = useCVState()
+const selectedIndex = ref(0)
 const { countPages, paginatedData, page, nextPage, backPage, goToPage } =
   usePagination(TEMPLATES, perPage)
 
-const openCurrentTemplate = (index: number) => {
+const openCurrentTemplate = (index: number, id: number) => {
+  templateIndex.value = id
   selectedIndex.value = index
   openModal()
 }

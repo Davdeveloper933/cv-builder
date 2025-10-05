@@ -34,6 +34,13 @@ li {
   position: relative;
 }
 
+/* по умолчанию (в т.ч. Firefox) — обычный инпут */
+input[type='date']{
+  position: static;
+  width: auto;
+  height: auto;
+  opacity: 1;
+}
 
 @layer base {
   body {

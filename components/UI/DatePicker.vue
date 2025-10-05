@@ -1,75 +1,76 @@
 <script lang="ts" setup>
-import { defineModel } from 'vue'
-import { formatDate } from '~/utils/helpers'
+import { defineModel, ref } from 'vue'
+import VueDatePicker, { type DatePickerInstance } from '@vuepic/vue-datepicker'
+import '@vuepic/vue-datepicker/dist/main.css'
+import { useCVState } from '~/data/useCVState'
 
-const { push, current } = useHistoryFunctions()
+interface Props {
+  isCurrent?: boolean
+  disabled?: boolean
+  label?: string
+}
 
-defineProps({
-  isCurrent: Boolean,
-  disabled: Boolean,
-  label: {
-    type: String,
-    default: 'Basic date picker',
-  },
+withDefaults(defineProps<Props>(), {
+  isCurrent: false,
+  disabled: false,
+  label: 'Basic date picker',
 })
 
+const { push } = useHistory()
+const { current } = useCVState()
+
 const modelValue = defineModel<Date | string>()
-const convertedModelValue = ref(formatDate(modelValue.value))
-const onChange = (event: Event): void => {
-  const target = event.target as HTMLInputElement
-  modelValue.value = target.value
+const datepicker = ref<DatePickerInstance>(null)
+
+const onChange = (modelData: Date | string): void => {
+  modelValue.value = modelData
   push(current.value)
 }
-</script>
 
+const openMenu = () => {
+  if (datepicker.value) datepicker.value.openMenu()
+}
+</script>
 <template>
-  <div class="inline-block border border-gray-300 rounded px-3 py-2 relative">
+  <div
+    @click="openMenu"
+    class="inline-block border cursor-pointer p-3 border-gray-300 rounded relative"
+  >
     <label
-      class="text-xs md:text-sm text-gray-500 absolute -top-2.5 left-2 px-1 bg-white z-10"
+      class="text-xs md:text-sm text-gray-500 absolute -top-2.5 left-2 px-1 bg-gray-50 z-10"
     >
       {{ label }}
     </label>
-    <div class="flex items-center gap-2 pt-0 justify-between">
-      <span :class="{ 'text-gray-300': disabled }">{{
-        convertedModelValue
-      }}</span>
-      <input
-        ref="date-input"
-        v-model="convertedModelValue"
-        :disabled="disabled"
-        class="text-black text-sm md:text-lg font-medium focus:outline-none"
-        placeholder="End date"
-        type="date"
-        :value="convertedModelValue"
-        @change="onChange"
-      />
-      <span
-        class="material-icons"
-        :class="{ 'text-gray-300': disabled, 'text-pink-500': !disabled }"
-      >
-        date_range
-      </span>
-    </div>
+    <span class="pretty-date" :class="{ 'text-gray-300': disabled }">{{
+      formatDate(modelValue)
+    }}</span>
+    <VueDatePicker
+      @update:model-value="onChange"
+      :clearable="false"
+      ref="datepicker"
+      v-model="modelValue"
+      :always-clearable="true"
+      :disabled="isCurrent"
+      :enable-time-picker="false"
+      auto-apply
+    />
   </div>
 </template>
 
-<style scoped>
-input[type='date']::-webkit-calendar-picker-indicator {
-  position: absolute;
+<style>
+.dp__input_wrap {
+  width: 100% !important;
+  height: 100% !important;
+  border: none !important;
+  box-shadow: none !important;
+  position: absolute !important;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  opacity: 0 !important;
   cursor: pointer;
 }
 
-input[type='date'] {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  cursor: pointer;
+.dp--clear-btn {
+  display: none !important;
 }
 </style>

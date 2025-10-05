@@ -90,8 +90,9 @@ export interface EditorFields {
 }
 
 export interface HistoryItem {
+  id: number
   resumeData: ResumeData // глубокая копия
   time: string
 }
 
-export type History = HistoryItem[]
+export type EditorHistory = HistoryItem[]

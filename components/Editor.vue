@@ -9,17 +9,28 @@
     ></ckeditor>
   </div>
 </template>
-<script setup>
+<script setup lang="ts">
+import { computed, ref } from 'vue'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
-import { editorInstance } from '~/composables/states'
 import '@ckeditor/ckeditor5-build-classic/build/translations/ru'
 import cloneDeep from 'lodash-es/cloneDeep.js'
+import { useCVState } from '~/data/useCVState'
 
-const { push, isWatching } = useHistoryFunctions()
-const props = defineProps(['modelValue', 'isReadOnly', 'id', 'resumeData'])
+interface Props {
+  modelValue: string
+  isReadOnly: boolean
+  id: string | number
+  resumeData: unknown
+}
+
+const props = defineProps<Props>()
 const emit = defineEmits(['update:modelValue'])
+
+const { editorInstance } = useCVState()
+const { push, isWatching } = useHistory()
+
 const readOnly = ref(false)
-let toolbarOptions = ref([
+const toolbarOptions = [
   'undo',
   'redo',
   '|',
@@ -33,7 +44,8 @@ let toolbarOptions = ref([
   '|',
   'outdent',
   'indent',
-])
+]
+
 let oldModelValue = cloneDeep(props.modelValue)
 let newValue = cloneDeep(props.modelValue)
 
@@ -42,7 +54,7 @@ const editorConfig = ref({
   toolbar: props.isReadOnly ? [] : toolbarOptions,
 })
 
-const isEditorFocused = () => {
+const isEditorFocused = (): boolean => {
   const el = document.querySelectorAll('.ck-editor__editable')
   return Array.from(el).some(
     (item) =>
@@ -53,11 +65,10 @@ const isEditorFocused = () => {
 
 const editorHtml = computed({
   get: () => props.modelValue,
-  set: (value) => {
+  set: (value: string) => {
     isWatching.value = true
     emit('update:modelValue', value)
     newValue = cloneDeep(value)
-    console.log(oldModelValue, newValue)
     if (oldModelValue !== newValue && isEditorFocused()) {
       push(props.resumeData)
     }
@@ -65,20 +76,18 @@ const editorHtml = computed({
   },
 })
 
-const onEditorReady = (editor) => {
+const onEditorReady = (editor: any) => {
   editorInstance.value = editor
-
   readOnly.value = props.isReadOnly
   if (props.isReadOnly) {
     editor.enableReadOnlyMode(props.id)
     editorConfig.value.toolbar = []
   } else {
     editor.disableReadOnlyMode(props.id)
-    editorConfig.value.toolbar = toolbarOptions.value
+    editorConfig.value.toolbar = toolbarOptions
   }
 }
 </script>
-
 <style>
 .isReadOnly + .ck-editor .ck.ck-editor__main > .ck-editor__editable {
   background: inherit !important;

@@ -51,7 +51,6 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
 import { COLORS } from '~/utils/constants'
 import type { ResumeData } from '~/types'
 import type { ThemeColor } from '~/types/editor'
@@ -59,10 +58,9 @@ import type { ThemeColor } from '~/types/editor'
 const props = defineProps<{
   resumeData: ResumeData
 }>()
-const { changeColor } = useEditor()
-const { push, current } = useHistoryFunctions()
+const { changeColor } = useThemeColor()
+const { push } = useHistory()
 
-const selectedColor = ref(COLORS[0])
 const changeColorWrapper = (color: ThemeColor, resumeData: ResumeData) => {
   changeColor(color, resumeData)
   push(props.resumeData)

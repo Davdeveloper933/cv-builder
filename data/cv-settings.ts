@@ -2,7 +2,7 @@ import type { ResumeData } from '~/types'
 import type { CustomSectionItem, LeftColumnSectionItem } from '~/types/editor'
 
 export const resumeTemplate1: ResumeData = {
-  id: '0',
+  id: 0,
   themeColor: '',
   profileImage: '/images/img.png', // заменил на реальный путь
   name: 'Name',
@@ -68,8 +68,8 @@ export const resumeTemplate1: ResumeData = {
         id: 1,
         title: 'Senior Software Developer',
         dates: {
-          start: new Date('Jan 2022'),
-          end: new Date('Dec 2023'),
+          start: '01 Jan 2022',
+          end: '01 Dec 2023',
           current: false,
         },
         company: 'Company',
@@ -87,8 +87,8 @@ export const resumeTemplate1: ResumeData = {
         id: 2,
         title: 'Web Developer',
         dates: {
-          start: new Date('Jan 2021'),
-          end: new Date('Dec 2021'),
+          start: '09 Jan 2021',
+          end: '09 Dec 2021',
           current: false,
         },
         company: 'Company',
@@ -112,8 +112,8 @@ export const resumeTemplate1: ResumeData = {
         id: 1,
         title: 'Masters in Software Engineering',
         dates: {
-          start: new Date('Jan 2019'),
-          end: new Date('Dec 2020'),
+          start: '05 Jan 2019',
+          end: '12 Dec 2020',
           current: false,
         },
         location: 'XYX University, Bangalore',
@@ -122,8 +122,8 @@ export const resumeTemplate1: ResumeData = {
         id: 2,
         title: 'Bachelor in Computer Science',
         dates: {
-          start: new Date('Jan 2015'),
-          end: new Date('Dec 2018'),
+          start: '09 Jan 2015',
+          end: '09 Dec 2018',
           current: false,
         },
         location: 'XYX University, Bangalore',
@@ -136,7 +136,7 @@ export const resumeTemplate1: ResumeData = {
 }
 
 export const resumeTemplate2: ResumeData = {
-  id: '1',
+  id: 1,
   themeColor: '',
   name: 'JACKSON',
   lastName: 'WRIGHT',
@@ -211,7 +211,7 @@ export const resumeTemplate2: ResumeData = {
         company: 'Signal Hound',
         country: 'Battle Ground, WA',
         dates: {
-          start: new Date('January 2023'),
+          start: '25 Mar 2015',
           end: new Date(),
           current: true,
         },
@@ -230,8 +230,8 @@ export const resumeTemplate2: ResumeData = {
         company: 'Digital Control, Inc.',
         country: 'Kent, WA',
         dates: {
-          start: new Date('January 2019'),
-          end: new Date('December 2022'),
+          start: '23 Jan 2019',
+          end: '06 Dec 2022',
           current: false,
         },
         content: {
@@ -249,8 +249,8 @@ export const resumeTemplate2: ResumeData = {
         company: 'JPMorgan Chase & Co',
         country: 'Seattle, WA',
         dates: {
-          start: new Date('January 2015'),
-          end: new Date('December 2018'),
+          start: '13 Jan 2015',
+          end: '20 Dec 2018',
           current: false,
         },
         content: {
@@ -274,8 +274,8 @@ export const resumeTemplate2: ResumeData = {
         title: 'BACHELOR OF SCIENCE: SOFTWARE ENGINEER',
         location: 'Washington State University\nPullman, WA',
         dates: {
-          start: new Date('feb 2014'),
-          end: new Date('jan 2018'),
+          start: '05 Feb 2014',
+          end: '25 Jan 2018',
           current: false,
         },
       },
@@ -306,7 +306,7 @@ export const resumeTemplate2: ResumeData = {
 }
 
 export const resumeTemplate3: ResumeData = {
-  id: '2',
+  id: 2,
   themeColor: '',
   profileImage: '/images/img.png',
   name: 'ROHAN',
@@ -339,8 +339,8 @@ export const resumeTemplate3: ResumeData = {
         company: 'ABC Company',
         country: 'Bangalore',
         dates: {
-          start: new Date('Jan 2022'),
-          end: new Date('Dec 2023'),
+          start: '09 Jan 2022',
+          end: '01 Dec 2023',
           current: false,
         },
         content: {
@@ -357,8 +357,8 @@ export const resumeTemplate3: ResumeData = {
         company: 'XYZ Company',
         country: 'Delhi',
         dates: {
-          start: new Date('Jan 2020'),
-          end: new Date('Dec 2021'),
+          start: '01 Jan 2020',
+          end: '01 Dec 2021',
           current: false,
         },
         content: {
@@ -378,8 +378,8 @@ export const resumeTemplate3: ResumeData = {
         id: 1,
         title: 'Masters in Accounting',
         dates: {
-          start: new Date('Jan 2018'),
-          end: new Date('Dec 2019'),
+          start: '08 Jan 2018',
+          end: '03 Dec 2019',
           current: false,
         },
         location: 'University of Delhi – Delhi',
@@ -388,8 +388,8 @@ export const resumeTemplate3: ResumeData = {
         id: 2,
         title: 'Bachelor in BBA',
         dates: {
-          start: new Date('Jan 2014'),
-          end: new Date('Dec 2017'),
+          start: '01 Jan 2014',
+          end: '01 Dec 2017',
           current: false,
         },
         location: 'Amity University – Noida',
@@ -486,7 +486,7 @@ export const customTemplate: ResumeData = {
         id: 1,
         title: 'Senior Data Analyst',
         dates: {
-          start: new Date('Jan 2018'),
+          start: '09 Jan 2018',
           end: new Date(),
           current: true,
         },
@@ -505,8 +505,8 @@ export const customTemplate: ResumeData = {
         id: 2,
         title: 'Junior Data Analyst',
         dates: {
-          start: new Date('Jan 2016'),
-          end: new Date('Jan 2018'),
+          start: '01 Jan 2016',
+          end: '01 Jan 2018',
           current: false,
         },
         company: 'THYNK UNLIMITED',
@@ -530,8 +530,8 @@ export const customTemplate: ResumeData = {
         id: 1,
         title: 'Bachelor of Statistics',
         dates: {
-          start: new Date('Jan 2013'),
-          end: new Date('Dec 2015'),
+          start: '01 Jan 2013',
+          end: '01 Dec 2015',
           current: false,
         },
         location: 'ARROWAI UNIVERSITY',
@@ -567,7 +567,7 @@ export const customTemplate: ResumeData = {
       title: 'Achievements',
       description: '',
       dates: {
-        start: new Date('Jan 2013'),
+        start: '01 Jan 2013',
         end: new Date(),
         current: false,
       },

@@ -4,14 +4,15 @@ import type {
   CustomSections,
   EditorFields,
   LeftColumnSections,
-  ThemeColor,
 } from '~/types/editor'
-import { emptySectionFields } from '~/composables/states'
+import { compressImage } from '~/utils/helpers'
+import { useCVState } from '~/data/useCVState'
 
 export default function useEditor() {
+  const { push } = useHistory()
+  const { current } = useCVState()
   const isEditing = ref(false)
   const isProfileImage = ref(false)
-  const { push, current } = useHistoryFunctions()
 
   const listInputModels = ref({
     inputText: '',
@@ -22,17 +23,23 @@ export default function useEditor() {
   }
 
   const onImageChange = (event: Event, resumeData: ResumeData) => {
-    const target = event.target as HTMLInputElement
-    const file = target.files?.[0]
-    if (file) {
-      const reader = new FileReader()
-      reader.onload = () => {
+    const target = event.target as HTMLInputElement | null
+    const file = target?.files?.[0]
+    if (!file) return
+
+    const reader = new FileReader()
+    reader.onload = async () => {
+      try {
         const dataUrl = reader.result as string
-        resumeData.profileImage = dataUrl
+        const compressed = await compressImage(dataUrl, 0.7)
+        resumeData.profileImage = compressed
+        push(resumeData)
+      } catch (error) {
+        console.error('Image compression failed', error)
       }
-      reader.readAsDataURL(file)
-      push(resumeData)
     }
+    reader.readAsDataURL(file)
+    if (target) target.value = ''
   }
 
   const removeCustomSectionItem = (
@@ -78,22 +85,7 @@ export default function useEditor() {
     push(current.value)
   }
 
-  const changeColor = (color: ThemeColor, resumeData: ResumeData): void => {
-    resumeData.themeColor = color.color
-    document.documentElement.style.setProperty('--primary', color.color)
-    document.documentElement.style.setProperty(
-      '--primary-lighter',
-      color.lighter,
-    )
-  }
-
-  const getCurrentColor = (colorValue: string) => {
-    return COLORS.find((color) => color.color === colorValue) || COLORS[0]
-  }
-
   return {
-    getCurrentColor,
-    changeColor,
     toggleEdit,
     onImageChange,
     removeCustomSectionItem,
@@ -101,7 +93,6 @@ export default function useEditor() {
     removeSectionItem,
     addNewAnySection,
     addNewSectionListItem,
-    emptySectionFields,
     listInputModels,
     isEditing,
     isProfileImage,

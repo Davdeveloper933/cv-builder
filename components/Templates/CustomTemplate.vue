@@ -1,10 +1,8 @@
 <script setup lang="ts">
 import OneColumnTemplate from '~/components/Templates/OneColumnTemplate.vue'
 import TwoColumnTemplate from '~/components/Templates/TwoColumnTemplate.vue'
-import { useCVTemplate } from '~/composables/useCVstate'
 
-const { customResume, resetResume, defaultCustomTemplate, resetSettings } =
-  useCVTemplate()
+const { customResume } = useCVTemplate()
 </script>
 
 <template>

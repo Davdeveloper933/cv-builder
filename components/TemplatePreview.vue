@@ -1,11 +1,17 @@
 <script setup lang="ts">
-import { useTemplatePicker } from '~/composables/useCVstate.js'
+import { useTemplatePicker } from '~/composables/useCVTemplate'
 import { TEMPLATES } from '~/utils/constants'
+
+interface Props {
+  src: string
+  selectedIndex: number
+  closeModal: () => void
+}
+
+const props = defineProps<Props>()
 
 const route = useRoute()
 const isCustomTemplate = computed(() => route.fullPath === '/edit-custom')
-
-const props = defineProps(['src', 'selectedIndex', 'closeModal', 'isOpen'])
 const { selectTemplate } = useTemplatePicker(TEMPLATES)
 
 const customize = () => {
@@ -13,10 +19,9 @@ const customize = () => {
   props.closeModal()
 }
 </script>
-
 <template>
-  <div class="p-3">
-    <img :src="src" alt="img" class="rounded-2xl" />
+  <div class="p-2">
+    <img :src="src" alt="img" class="rounded-xl" />
 
     <div class="mt-4 flex items-center space-x-2 lg:space-x-4">
       <button

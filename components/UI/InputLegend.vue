@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import type { ResumeData } from '~/types'
+import { useCVState } from '~/data/useCVState'
 
-const props = withDefaults(
+withDefaults(
   defineProps<{
     fieldLabel: string
     inputType?: string
@@ -12,7 +13,8 @@ const props = withDefaults(
   },
 )
 
-const { push, historyClone, current } = useHistoryFunctions()
+const { push } = useHistory()
+const { current } = useCVState()
 const fieldModelValue = defineModel()
 const onChange = () => {
   push(current.value)

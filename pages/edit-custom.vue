@@ -5,62 +5,48 @@
     :template="defaultCustomTemplate"
     :resume-data="customResume"
   >
-    <div class="flex pt-6 bg-white relative">
-      <div class="md:w-1/3 w-full px-2" v-if="customResume">
+    <div class="grid grid-cols-3 md:pt-6 bg-white relative">
+      <div class="col-span-3 md:col-span-1 px-2" v-if="customResume">
         <ResumeEditor
           :resume-data="customResume"
           :template="defaultCustomTemplate"
           :reset="resetResume"
         />
       </div>
-      <div class="col-span-2 hidden lg:block">
+      <div class="hidden md:col-span-1 md:block">
         <div class="border-gray-800">
-          <div ref="cvref" v-if="customResume">
-            <ClientOnly>
-              <ResumeWrapper>
+          <div
+            class="md:origin-top lg:scale-[.7] xl:scale-[1] md:scale-[.5]"
+            v-if="customResume"
+          >
+            <div ref="cvref">
+              <ResumeWrapper
+                :height-class="'h-full'"
+                :max-height-class="'max-h-full'"
+              >
                 <CustomTemplate ref="templateRef" class="" id="preview" />
               </ResumeWrapper>
-            </ClientOnly>
-
-            <!--            <ClientOnly>-->
-            <!--              <ResumeWrapper>-->
-            <!--                <OneColumnTemplate-->
-            <!--                  v-if="customResume?.layout === 'oneColumn'"-->
-            <!--                  ref="templateRef"-->
-            <!--                  :resume-data-for-editing="customResume"-->
-            <!--                  class=""-->
-            <!--                  id="preview"-->
-            <!--                />-->
-            <!--                <TwoColumnTemplate-->
-            <!--                  v-if="customResume?.layout === 'twoColumn'"-->
-            <!--                  ref="templateRef"-->
-            <!--                  :resume-data-for-editing="customResume"-->
-            <!--                  class=""-->
-            <!--                  id="preview"-->
-            <!--                />-->
-            <!--              </ResumeWrapper>-->
-            <!--            </ClientOnly>-->
+            </div>
           </div>
         </div>
       </div>
     </div>
-    <!--    </template>-->
   </ResumeEditorLayout>
 </template>
 
 <script lang="ts" setup>
-import { cvref } from '~/composables/states'
-import { useCVTemplate } from '~/composables/useCVstate'
+import { useCVTemplate } from '~/composables/useCVTemplate'
 import ResumeEditorLayout from '~/components/ResumeEditorLayout.vue'
 import CustomTemplate from '~/components/Templates/CustomTemplate.vue'
+import { useCVState } from '~/data/useCVState'
 
 definePageMeta({
   layout: 'edit',
 })
-const { setCurrent, history } = useHistoryFunctions()
-const { customResume, resetResume, defaultCustomTemplate, resetSettings } =
-  useCVTemplate()
-const { changeColor, getCurrentColor } = useEditor()
+const { setCurrent } = useHistory()
+const { cvref } = useCVState()
+const { customResume, resetResume, defaultCustomTemplate } = useCVTemplate()
+const { changeColor, getCurrentColor } = useThemeColor()
 
 onMounted(() => {
   const currentColor = getCurrentColor(customResume.value.themeColor)
@@ -71,13 +57,9 @@ onMounted(() => {
 watch(
   () => customResume.value,
   (newValue) => {
-    // myResumes.value.customResume = {
-    //   resume: newValue,
-    //   history: history.value,
-    // }
     setCurrent(newValue)
   },
-  { deep: true },
+  { deep: true, immediate: true },
 )
 </script>
 

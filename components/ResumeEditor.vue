@@ -137,24 +137,23 @@ import useEditor from '~/composables/useEditor'
 import DynamicEditorSection from '~/components/editor/DynamicEditorSection.vue'
 import ProfileImage from '~/components/editor/ProfileImage.vue'
 import PersonalDetails from '~/components/editor/PersonalDetails.vue'
-import useHistoryFunctions from '~/composables/useHistoryFunctions'
+import useHistory from '~/composables/useHistory'
 import DisplaySections from '~/components/editor/DisplaySections.vue'
 import ThemePicker from '~/components/editor/ThemePicker.vue'
 import LayoutToggle from '~/components/editor/LayoutToggle.vue'
+import { useCVState } from '~/data/useCVState'
 
-const props = defineProps<{
+interface Props {
   resumeData: ResumeData
   template: ResumeData
   reset: (template: ResumeData | undefined) => void
-}>()
+}
 
-const {
-  removeCustomSectionItem,
-  addNewAnySection,
-  emptySectionFields,
-  listInputModels,
-} = useEditor()
-const { resetHistory, setCurrent, push, history } = useHistoryFunctions()
+const props = defineProps<Props>()
+
+const { listInputModels } = useEditor()
+const { setCurrent, push } = useHistory()
+const { history } = useCVState()
 
 onMounted(() => {
   if (history.value.length < 1) {

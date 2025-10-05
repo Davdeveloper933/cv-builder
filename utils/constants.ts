@@ -6,7 +6,8 @@ import {
   resumeTemplate3,
 } from '~/data/cv-settings'
 import Template2 from '~/components/Templates/Template2.vue'
-import Template4 from '~/components/Templates/Template4.vue'
+import Template3 from '~/components/Templates/Template3.vue'
+import type { EditorFields } from '~/types/editor'
 
 export const CHECKBOX_ITEMS = [
   { value: 'languages', label: 'Languages' },
@@ -32,37 +33,79 @@ export const TEMPLATES: Array<Template> = [
     name: 'Template 1',
     component: Template1,
     data: resumeTemplate1,
-    img: '/images/tmpl1.jpg',
+    img: '/images/tmpl1.png',
   },
   {
     name: 'Template 2',
     component: Template2,
     data: resumeTemplate2,
-    img: '/images/tmpl3.jpg',
+    img: '/images/tmpl3.png',
   },
 
   {
-    name: 'Template 4',
-    component: Template4,
+    name: 'Template 3',
+    component: Template3,
     data: resumeTemplate3,
-    img: '/images/tmpl2.webp',
+    img: '/images/tmpl2.png',
   },
   {
-    name: 'Template 4',
-    component: Template4,
+    name: 'Template 3',
+    component: Template3,
     data: resumeTemplate3,
-    img: '/images/tmpl2.webp',
+    img: '/images/tmpl2.png',
   },
   {
     name: 'Template 1',
     component: Template1,
     data: resumeTemplate1,
-    img: '/images/tmpl1.jpg',
+    img: '/images/tmpl1.png',
   },
   {
     name: 'Template 2',
     component: Template2,
     data: resumeTemplate2,
-    img: '/images/tmpl3.jpg',
+    img: '/images/tmpl3.png',
   },
 ]
+
+export const emptySectionFields: EditorFields = {
+  education: {
+    id: 0,
+    title: 'Your title',
+    dates: {
+      start: new Date('feb 2014'),
+      end: new Date('jan 2018'),
+      current: false,
+    },
+    location: 'Location',
+  },
+  experience: {
+    id: 0,
+    title: 'Your title',
+    dates: {
+      start: new Date('feb 2014'),
+      end: new Date('jan 2018'),
+      current: false,
+    },
+    company: 'Company',
+    country: 'Country',
+    content: 'Summary',
+  },
+  customSection: {
+    id: 0,
+    title: 'Custom Section',
+    description: '',
+    dates: {
+      start: new Date('feb 2014'),
+      end: new Date('jan 2018'),
+      current: false,
+    },
+    content: 'Summary',
+  },
+  leftColumnSection: {
+    id: 0,
+    title: 'Left Column Section',
+    description: '',
+    contentHTML: '',
+  },
+}

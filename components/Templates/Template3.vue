@@ -78,8 +78,9 @@
                 {{ job.company }} – {{ job.country }}
               </span>
               <p class="text-sm text-gray-600">
-                {{ formatDate(job.dates.start) }} –
-                {{ formatDate(job.dates.end) }}
+                <span>{{ formatDate(job.dates.start) }}</span> -
+                <span v-if="job.dates.current" class="capitalize">current</span>
+                <span v-else>{{ formatDate(job.dates.end) }}</span>
               </p>
             </div>
             <ClientOnly>
@@ -101,8 +102,9 @@
             <div class="flex justify-between items-center">
               <span class="italic text-gray-800">{{ edu.location }}</span>
               <p class="text-sm text-gray-600">
-                {{ formatDate(edu.dates.start) }} –
-                {{ formatDate(edu.dates.end) }}
+                <span>{{ formatDate(edu.dates.start) }}</span> -
+                <span v-if="edu.dates.current" class="capitalize">current</span>
+                <span v-else>{{ formatDate(edu.dates.end) }}</span>
               </p>
             </div>
           </div>
@@ -178,7 +180,7 @@
 </template>
 
 <script setup lang="ts">
-import Editor from '~/components/editor.vue'
+import Editor from '~/components/Editor.vue'
 import type { ResumeData } from '~/types'
 
 defineProps<{

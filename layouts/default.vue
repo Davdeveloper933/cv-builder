@@ -1,6 +1,6 @@
 <template>
   <Header />
-  <slot />
+  <main><slot /></main>
 </template>
 
 <script lang="ts" setup>

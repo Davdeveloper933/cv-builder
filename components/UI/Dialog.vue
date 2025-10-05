@@ -57,8 +57,9 @@
                   class="flex h-full flex-col overflow-y-scroll bg-white py-6 shadow-xl"
                 >
                   <div class="px-4 sm:px-6">
-                    <DialogTitle class="text-base font-semibold text-gray-900"
-                      >History</DialogTitle
+                    <DialogTitle
+                      class="text-lg font-semibold text-slate-700 mb-4"
+                      >{{ dialogTitle }}</DialogTitle
                     >
                   </div>
                   <div class="relative mt-6 flex-1 px-4 sm:px-6">
@@ -74,7 +75,7 @@
   </TransitionRoot>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import {
   Dialog,
   DialogPanel,
@@ -84,5 +85,11 @@ import {
 } from '@headlessui/vue'
 import { XMarkIcon } from '@heroicons/vue/24/outline'
 
-defineProps(['isOpenProp', 'closePanel'])
+interface Props {
+  isOpenProp: boolean
+  closePanel: () => void
+  dialogTitle: string
+}
+
+defineProps<Props>()
 </script>
