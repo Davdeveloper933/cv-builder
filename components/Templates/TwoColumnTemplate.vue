@@ -72,7 +72,7 @@
             </li>
           </ul>
         </section>
-        <section v-if="resumeDataForEditing.languages.show">
+        <section v-if="resumeDataForEditing.languages?.show">
           <div class="flex items-center">
             <h2 class="text-sm font-bold text-primary uppercase mr-4">
               {{ resumeDataForEditing.languages.label }}
@@ -234,7 +234,7 @@ import Editor from '~/components/Editor.vue'
 import type { ResumeData } from '~/types'
 
 defineProps<{
-  resumeDataForEditing: ResumeData
+  resumeDataForEditing: ResumeData | Record<string, {}>
 }>()
 </script>
 

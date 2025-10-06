@@ -1,13 +1,26 @@
 <script setup lang="ts">
-import type { Ref } from 'vue'
-
 interface Props {
-  el: HTMLElement | Ref<HTMLElement | null>
+  el: HTMLElement | null
 }
 
 const props = defineProps<Props>()
 
-const downloadPDF = () => {
+// const downloadPDF = () => {
+//   const element = props.el
+//   if (!element) return
+//
+//   const opt = {
+//     margin: 0,
+//     filename: 'myResume.pdf',
+//     html2canvas: {
+//       scale: 2,
+//     },
+//   }
+//
+//   window.html2pdf().set(opt).from(element).save()
+// }
+
+const downloadPDF = async () => {
   const element = props.el
   if (!element) return
 
@@ -19,7 +32,22 @@ const downloadPDF = () => {
     },
   }
 
-  window.html2pdf().set(opt).from(element).save()
+  // Получаем blob вместо прямого сохранения
+  const blob = await window.html2pdf().set(opt).from(element).outputPdf('blob')
+
+  // Создаем ссылку для скачивания
+  const url = URL.createObjectURL(blob)
+  const link = document.createElement('a')
+  link.href = url
+  link.download = 'myResume.pdf' // Имя файла без кодирования
+
+  // Добавляем в DOM, кликаем и удаляем
+  document.body.appendChild(link)
+  link.click()
+  document.body.removeChild(link)
+
+  // Освобождаем память
+  URL.revokeObjectURL(url)
 }
 </script>
 

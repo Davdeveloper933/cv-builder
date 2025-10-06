@@ -31,9 +31,7 @@ export function useCVTemplate() {
 
   const resetResume = (template: ResumeData, isCustomTemplate: boolean) => {
     const originalTemplate = transformResumeDataContent(cloneDeep(template))
-    const defaultCustomTemplate = transformResumeDataContent(
-      cloneDeep(customTemplate),
-    )
+
     if (isCustomTemplate) {
       customResume.value = originalTemplate
     } else {

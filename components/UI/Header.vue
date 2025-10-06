@@ -1,13 +1,6 @@
 <script setup lang="ts">
-import {
-  useCustomTemplatePicker,
-  useTemplatePicker,
-} from '~/composables/useCVTemplate'
-
 const route = useRoute()
-const isCustomTemplate = computed(() => route.fullPath === '/edit-custom')
-const { selectCustomTemplate } = useCustomTemplatePicker()
-const { selectTemplate, templateIndex } = useTemplatePicker(TEMPLATES)
+
 const isOpen = ref(false)
 
 const toggleMenu = () => {

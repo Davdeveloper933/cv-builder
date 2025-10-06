@@ -1,5 +1,14 @@
 import type { ResumeData } from '~/types/index'
 
+export type KeyOfResumeData = keyof ResumeData
+
+export type SelectedSections =
+  | LabelContent
+  | Profile
+  | ExperienceSection
+  | EducationSection
+  | Languages
+
 export type ThemeColor = {
   name: string
   color: string
@@ -10,7 +19,7 @@ export type LabelContent = {
   show?: boolean
   label: string
   subLabel?: string
-  content?: string[] | string
+  content?: string[]
   contentHTML?: string[] | string
 }
 
@@ -25,7 +34,7 @@ export type ExperienceItem = {
   title: string
   company: string
   country: string
-  dates: { start: Date; end: Date; current: boolean }
+  dates: { start: string; end: string | Date; current: boolean }
   content?: string[] | string | { tag: string; content: string[] }
 }
 
@@ -38,7 +47,7 @@ export type ExperienceSection = {
 export type EducationItem = {
   id: number
   title: string
-  dates: { start: Date; end: Date; current: boolean }
+  dates: { start: string; end: string | Date; current: boolean }
   location?: string
 }
 
@@ -68,7 +77,7 @@ export type CustomSectionItem = {
   id: number
   title?: string
   description?: string
-  dates: { start: Date; end: Date; current: boolean }
+  dates: { start: string; end: string | Date; current: boolean }
   content?: string[] | string
   contentHTML?: string[] | string
 }
@@ -91,7 +100,7 @@ export interface EditorFields {
 
 export interface HistoryItem {
   id: number
-  resumeData: ResumeData // глубокая копия
+  resumeData: ResumeData
   time: string
 }
 

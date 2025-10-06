@@ -11,14 +11,12 @@ const { customResume } = useCVTemplate()
       v-if="customResume?.layout === 'oneColumn'"
       ref="templateRef"
       :resume-data-for-editing="customResume"
-      class=""
       id="preview"
     />
     <TwoColumnTemplate
       v-if="customResume?.layout === 'twoColumn'"
       ref="templateRef"
       :resume-data-for-editing="customResume"
-      class=""
       id="preview"
     />
   </div>

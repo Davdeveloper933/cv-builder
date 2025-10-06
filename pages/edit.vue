@@ -55,7 +55,7 @@ const { templateResume, resetSettings, resetResume, originalTemplate } =
 watch(
   () => templateResume.value,
   (newValue) => {
-    setCurrent(newValue)
+    if (newValue) setCurrent(newValue)
   },
   { deep: true, immediate: true },
 )

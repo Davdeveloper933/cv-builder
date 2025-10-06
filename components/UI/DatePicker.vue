@@ -19,7 +19,7 @@ withDefaults(defineProps<Props>(), {
 const { push } = useHistory()
 const { current } = useCVState()
 
-const modelValue = defineModel<Date | string>()
+const modelValue = defineModel<Date | string | undefined>()
 const datepicker = ref<DatePickerInstance>(null)
 
 const onChange = (modelData: Date | string): void => {

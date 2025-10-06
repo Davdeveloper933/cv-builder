@@ -112,7 +112,7 @@ interface Props {
   nextPage: () => void
   backPage: () => void
   goToPage: (num: number) => void
-  countPages: number[]
+  countPages: number
 }
 
 defineProps<Props>()

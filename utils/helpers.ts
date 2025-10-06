@@ -1,6 +1,8 @@
 import type { ResumeData, ResumeItem, ResumeSection } from '~/types'
+import type { KeyOfResumeData } from '~/types/editor'
 
-export const formatDate = (input: string | Date): string => {
+export const formatDate = (input?: string | Date): string => {
+  if (!input) return ''
   const d = input instanceof Date ? input : new Date(input)
   if (isNaN(d.getTime())) return ''
 
@@ -33,18 +35,18 @@ export const htmlFromContent = (
 
 export const transformResumeDataContent = (
   data: ResumeData | undefined,
-): ResumeData | undefined => {
-  if (!data) return
+): Record<string, {}> => {
+  if (!data) return {}
   const clone = Object.assign({}, data)
-  const transformed: Record<string, {}> = {}
+  const transformed: ResumeData | Record<string, {}> = {}
   Object.keys(clone).forEach((key) => {
-    const section = clone[key as keyof ResumeData] as ResumeSection
+    const section = clone[key as KeyOfResumeData] as ResumeSection
 
     section.list?.forEach((item: ResumeItem) => {
-      if (item.content && Array.isArray(item.content.content)) {
-        item.content = htmlFromContent(
-          item.content as { tag: string; content: string[] },
-        )
+      type ContentType = { tag: string; content: string[] }
+      const content = item.content as ContentType
+      if (content && Array.isArray(content.content)) {
+        item.content = htmlFromContent(item.content as ContentType)
       }
     })
 
@@ -60,15 +62,15 @@ export const transformResumeDataContent = (
     if (section.contentHTML && Array.isArray(section.contentHTML)) {
       const convertContentToArray: string[] = section.contentHTML
 
-      transformed[key] = {
+      transformed[key as KeyOfResumeData] = {
         ...section,
         contentHTML: htmlFromArray(convertContentToArray),
       }
     } else {
-      transformed[key] = section
+      transformed[key as KeyOfResumeData] = section
     }
   })
-  return transformed as ResumeData
+  return transformed
 }
 
 export const compressImage = (

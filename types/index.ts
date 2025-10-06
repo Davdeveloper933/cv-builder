@@ -24,8 +24,8 @@ export interface ResumeItem {
   company?: string
   location?: string
   dates?: {
-    start: Date
-    end?: Date
+    start: string
+    end?: string | Date
     current?: boolean
   }
   content?: string[] | string | { tag: string; content: string[] }
@@ -79,14 +79,4 @@ export interface Template {
   component: Component
   data: ResumeData
   img: string
-}
-
-export interface MyResume {
-  resume: ResumeData | null
-  history: History
-}
-
-export interface MyResumes {
-  templateResume: MyResume | null
-  customResume: MyResume | null
 }

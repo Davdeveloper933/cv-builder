@@ -2,7 +2,7 @@
 import type { ResumeData } from '~/types'
 
 defineProps<{
-  src: string
+  src?: string
   resumeData: ResumeData
   isCustomTemplate: boolean
 }>()

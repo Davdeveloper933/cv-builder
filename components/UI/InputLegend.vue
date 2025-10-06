@@ -25,7 +25,7 @@ const onChange = () => {
   <div class="w-full relative">
     <label
       :for="fieldLabel"
-      class="inline-block capitalize top-[-9px] left-5 absolute z-10 bg-white px-1 text-xs md:text-sm font-medium text-gray-700 mb-1"
+      class="inline-block capitalize top-[-12px] left-5 absolute bg-white px-1 text-xs md:text-sm font-medium text-gray-700 mb-1"
       >{{ fieldLabel }}</label
     >
     <input

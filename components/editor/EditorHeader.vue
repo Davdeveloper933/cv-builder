@@ -12,7 +12,7 @@ import { useCVState } from '~/data/useCVState'
 
 const props = defineProps<{
   templates: { component: any; data: ResumeData }[]
-  template: ResumeData
+  template?: ResumeData
   el: HTMLElement | null
   resetResume: Function
   resetSettings: Function

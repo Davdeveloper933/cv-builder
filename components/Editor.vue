@@ -15,12 +15,17 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
 import '@ckeditor/ckeditor5-build-classic/build/translations/ru'
 import cloneDeep from 'lodash-es/cloneDeep.js'
 import { useCVState } from '~/data/useCVState'
+import type { ResumeData } from '~/types'
 
 interface Props {
-  modelValue: string
+  modelValue?:
+    | string
+    | string[]
+    | { tag: string; content: string[] }
+    | undefined
   isReadOnly: boolean
   id: string | number
-  resumeData: unknown
+  resumeData?: ResumeData
 }
 
 const props = defineProps<Props>()
@@ -70,7 +75,7 @@ const editorHtml = computed({
     emit('update:modelValue', value)
     newValue = cloneDeep(value)
     if (oldModelValue !== newValue && isEditorFocused()) {
-      push(props.resumeData)
+      if (props.resumeData) push(props.resumeData)
     }
     oldModelValue = cloneDeep(value)
   },

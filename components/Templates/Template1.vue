@@ -64,11 +64,11 @@
 
         <div>
           <h2 class="text-lg font-semibold uppercase mb-2">
-            {{ resumeDataForEditing.languages.label }}
+            {{ resumeDataForEditing.languages?.label }}
           </h2>
           <ul class="text-sm list-inside list-[circle] space-y-1">
             <li
-              v-for="(lang, i) in resumeDataForEditing.languages.list"
+              v-for="(lang, i) in resumeDataForEditing.languages?.list"
               :key="i"
             >
               {{ lang.lang }}: {{ lang.level }}

@@ -145,8 +145,8 @@ import { useCVState } from '~/data/useCVState'
 
 interface Props {
   resumeData: ResumeData
-  template: ResumeData
-  reset: (template: ResumeData | undefined) => void
+  template?: ResumeData
+  reset: Function
 }
 
 const props = defineProps<Props>()

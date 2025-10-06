@@ -57,7 +57,10 @@ export default function useEditor() {
     delete resumeData[currentSection]
   }
 
-  const removeSectionItem = (currentSection: any[], index: number) => {
+  const removeSectionItem = (
+    currentSection: Array<string | object>,
+    index: number,
+  ) => {
     currentSection.splice(index, 1)
     push(current.value)
   }

@@ -31,21 +31,23 @@
 <script setup lang="ts">
 import { CHECKBOX_ITEMS } from '~/utils/constants'
 import type { ResumeData } from '~/types'
+import type { KeyOfResumeData, SelectedSections } from '~/types/editor'
 
 const props = defineProps<{
   resumeData: ResumeData
 }>()
 
 const { push } = useHistory()
-
 const selectedSections: ComputedRef<string[]> = computed(() => {
-  return Object.keys(props.resumeData).filter(
-    (key) => props.resumeData[key].show,
-  )
+  return Object.keys(props.resumeData).filter((key) => {
+    const item = props.resumeData[key as KeyOfResumeData] as SelectedSections
+    return item?.show
+  })
 })
 
-const onChange = (item: string) => {
-  props.resumeData[item].show = !props.resumeData[item].show
+const onChange = (key: string) => {
+  const item = props.resumeData[key as KeyOfResumeData] as SelectedSections
+  item.show = !item?.show
   push(props.resumeData)
 }
 </script>

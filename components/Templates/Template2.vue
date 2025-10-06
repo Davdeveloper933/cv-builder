@@ -86,7 +86,7 @@
             <span class="align-sub">languages</span>
           </h2>
           <ul
-            v-for="lang in resumeDataForEditing.languages.list"
+            v-for="lang in resumeDataForEditing.languages?.list"
             class="list-none md:px-6 px-3 list-inside"
           >
             <li>{{ lang.lang }}, {{ lang.level }}</li>
@@ -206,7 +206,7 @@
 <script lang="ts" setup>
 import Editor from '~/components/Editor.vue'
 import type { ResumeData } from '~/types'
-import { formatDate } from '../../utils/helpers'
+import { formatDate } from '~/utils/helpers'
 
 interface ForPreviewProps {
   cols: string
@@ -220,11 +220,12 @@ withDefaults(
     forPreview: ForPreviewProps
   }>(),
   {
-    forPreview: {
+    forPreview: () => ({
+      // Добавьте стрелочную функцию
       cols: '3',
       span: '2',
       maxWidth: '[793px]',
-    },
+    }),
   },
 )
 </script>

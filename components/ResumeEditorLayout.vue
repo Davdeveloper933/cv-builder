@@ -22,13 +22,14 @@ import type { ResumeData } from '~/types'
 import { useCVState } from '~/data/useCVState'
 
 interface Props {
-  useCVTemplate: () => {
-    originalTemplate: ResumeData
-    resetResume: (data: ResumeData, isCustom?: boolean) => void
-    resetSettings: () => void
-  }
-  template: ResumeData
-  resumeData: ResumeData
+  useCVTemplate: Function
+  //   () => {
+  //   originalTemplate: ResumeData
+  //   resetResume: (data: ResumeData, isCustom?: boolean) => void
+  //   resetSettings: () => void
+  // }
+  template?: ResumeData
+  resumeData?: ResumeData
   el: HTMLElement | null
 }
 

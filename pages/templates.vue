@@ -67,15 +67,4 @@ const openCurrentTemplate = (index: number, id: number) => {
 }
 </script>
 
-<style scoped>
-/* we will explain what these classes do next! */
-.v-enter-active,
-.v-leave-active {
-  transition: visibility 1.5s ease-in-out;
-}
-
-.v-enter-from,
-.v-leave-to {
-  opacity: 0;
-}
-</style>
+<style scoped></style>

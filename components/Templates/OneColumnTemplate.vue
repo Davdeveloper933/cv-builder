@@ -205,7 +205,7 @@ import Editor from '~/components/Editor.vue'
 import type { ResumeData } from '~/types'
 
 defineProps<{
-  resumeDataForEditing: ResumeData
+  resumeDataForEditing: ResumeData | Record<string, {}>
 }>()
 </script>
 
