@@ -25,11 +25,6 @@
       <div class="container mx-auto">
         <div class="flex justify-center mt-4 p-4">
           <LandingHeroImage />
-          <!--          <img-->
-          <!--            class="w-full sm:max-w-screen-sm border shadow-md shadow-black rounded-lg"-->
-          <!--            src="/images/presentation.png"-->
-          <!--            alt=""-->
-          <!--          />-->
         </div>
       </div>
     </div>

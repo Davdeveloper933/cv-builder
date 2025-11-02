@@ -24,28 +24,39 @@
 **Getting Started:**
 
 1. Clone the repository:
+
    ```bash
    git clone https://github.com/yourusername/cv-converter.git
    cd cv-converter
 
+   ```
+
 2. Install dependencies:
-    ```bash
+
+   ```bash
    npm install
 
-3. Run the development server:
-    ```bash
-   npm run dev
-4. Open your browser and navigate to:
-     ```bash
-   http://localhost:3000
-5. To build the app for production:
-    ```bash
-   npm run build
-6. To preview the production build locally:
-    ```bash
-    npm run preview
+   ```
 
-****
+3. Run the development server:
+   ```bash
+   npm run dev
+   ```
+4. Open your browser and navigate to:
+   ```bash
+   http://localhost:3000
+   ```
+5. To build the app for production:
+   ```bash
+   npm run build
+   ```
+6. To preview the production build locally:
+   ```bash
+   npm run preview
+   ```
+
+---
+
 **Project Structure Overview:**
 
     components/
@@ -54,21 +65,20 @@
     ├── History.vue               # Undo/redo logic
     ├── DownloadPdf.vue           # PDF export functionality
     ├── editor/                   # Dynamic input fields
-    
+
     composables/
     ├── useHistory.ts    # History tracking
     ├── useEditor.ts              # Editor state logic
-    
+
     assets/
     ├── css/                      # Tailwind styles
     ├── images/                   # Profile and template assets
-    
+
     pages/
     ├── index.vue                 # Main editing page
-    
+
     types/
     ├── index.ts                  # Shared interfaces and types
-
 
 **Author:**
 
@@ -79,4 +89,3 @@
 **License:**
 
     MIT — free to use, modify, and distribute.
-

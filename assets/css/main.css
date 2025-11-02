@@ -1,18 +1,14 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 
 * {
   box-sizing: border-box;
 }
 
-
-
 :root {
-  --primary: #DB2777;
-  --primary-lighter:#f9a8d4;
+  --primary: #db2777;
+  --primary-lighter: #f9a8d4;
 }
 
 html,
@@ -22,7 +18,7 @@ body {
 }
 
 body {
-  background:#eff6ff;
+  background: #eff6ff;
 }
 
 ul {
@@ -35,7 +31,7 @@ li {
 }
 
 /* по умолчанию (в т.ч. Firefox) — обычный инпут */
-input[type='date']{
+input[type='date'] {
   position: static;
   width: auto;
   height: auto;
@@ -66,7 +62,7 @@ input[type='date']{
     font-size: 0;
   }
   .custom-template ul li::before {
-    content: ""; /* или другой символ */
+    content: ''; /* или другой символ */
     width: 6px;
     height: 6px;
     /*position: absolute;*/
@@ -77,9 +73,7 @@ input[type='date']{
     border-radius: 100%;
     background-color: var(--primary);
   }
-
 }
-
 
 .material-icons {
   width: 1em;
@@ -87,4 +81,3 @@ input[type='date']{
   display: inline-block;
   vertical-align: middle;
 }
-
