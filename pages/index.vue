@@ -1,5 +1,5 @@
 <template>
-  <section class="bg-blue-50">
+  <section>
     <div class="flex justify-center flex-col items-center">
       <h1 class="font-bold text-center max-w-2xl text-2xl">
         Build a Standout
@@ -24,17 +24,20 @@
     <div>
       <div class="container mx-auto">
         <div class="flex justify-center mt-4 p-4">
-          <img
-            class="w-full sm:max-w-screen-sm border shadow-md shadow-black rounded-lg"
-            src="/images/presentation.png"
-            alt=""
-          />
+          <LandingHeroImage />
+          <!--          <img-->
+          <!--            class="w-full sm:max-w-screen-sm border shadow-md shadow-black rounded-lg"-->
+          <!--            src="/images/presentation.png"-->
+          <!--            alt=""-->
+          <!--          />-->
         </div>
       </div>
     </div>
   </section>
 </template>
 
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import LandingHeroImage from '~/components/LandingHeroImage.vue'
+</script>
 
 <style></style>

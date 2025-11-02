@@ -43,7 +43,10 @@ const { emptyFields } = useCVState()
     <div v-if="contentList !== undefined" class="space-y-6">
       <!-- List Input (Skills, etc.) -->
       <div v-if="contentList.content" class="space-y-4">
-        <EditSectionLabel v-model:label="contentList.label" />
+        <EditSectionLabel
+          :make-editable="false"
+          v-model:label="contentList.label"
+        />
 
         <!-- New Item Input -->
         <div class="flex items-normal">
@@ -86,7 +89,10 @@ const { emptyFields } = useCVState()
 
       <!-- Rich Text (contentHTML) -->
       <div v-else-if="contentList.contentHTML" class="space-y-2">
-        <EditSectionLabel v-model:label="contentList.label" />
+        <EditSectionLabel
+          :make-editable="false"
+          v-model:label="contentList.label"
+        />
 
         <ClientOnly>
           <Editor
@@ -101,7 +107,7 @@ const { emptyFields } = useCVState()
 
     <!-- Profile Section -->
     <div v-if="profile !== undefined" class="space-y-2">
-      <EditSectionLabel v-model:label="profile.label" />
+      <EditSectionLabel :make-editable="false" v-model:label="profile.label" />
 
       <ClientOnly>
         <Editor
@@ -115,7 +121,10 @@ const { emptyFields } = useCVState()
 
     <!-- Experience Section -->
     <div v-if="experience !== undefined" class="space-y-4">
-      <EditSectionLabel v-model:label="experience.label" />
+      <EditSectionLabel
+        :make-editable="false"
+        v-model:label="experience.label"
+      />
       <button
         class="px-4 py-2 bg-blue-600 text-white rounded-lg uppercase text-xs md:text-sm mb-4 hover:bg-blue-700 transition"
         @click="addNewAnySection(experience.list, 'experience', emptyFields)"
@@ -158,12 +167,12 @@ const { emptyFields } = useCVState()
               :resume-data="resumeData"
             />
           </ClientOnly>
-          <div class="flex justify-center">
+          <div class="flex justify-start">
             <button
               class="px-4 py-2 bg-red-600 text-white rounded-lg uppercase text-xs md:text-sm hover:bg-red-700 transition"
               @click="removeSectionItem(experience.list, i)"
             >
-              Delete this Section
+              remove Section item
             </button>
           </div>
         </div>
@@ -172,7 +181,10 @@ const { emptyFields } = useCVState()
 
     <!-- Education Section -->
     <div v-if="education !== undefined" class="space-y-4">
-      <EditSectionLabel v-model:label="education.label" />
+      <EditSectionLabel
+        :make-editable="false"
+        v-model:label="education.label"
+      />
       <button
         class="px-4 py-2 bg-blue-600 text-white rounded-lg uppercase text-xs md:text-sm mb-4 hover:bg-blue-700 transition"
         @click="addNewAnySection(education.list, 'education', emptyFields)"
@@ -200,12 +212,12 @@ const { emptyFields } = useCVState()
             placeholder="Location"
             type="text"
           />
-          <div class="flex justify-center">
+          <div class="flex justify-start">
             <button
               class="px-4 py-2 bg-red-600 text-white rounded-lg uppercase text-xs md:text-sm hover:bg-red-700 transition"
               @click="removeSectionItem(education.list, i)"
             >
-              Delete this
+              REMOVE section item
             </button>
           </div>
         </div>
@@ -254,7 +266,7 @@ const { emptyFields } = useCVState()
               />
             </ClientOnly>
             <button
-              class="w-full px-4 py-2 bg-red-600 text-white rounded-lg uppercase text-xs md:text-sm hover:bg-red-700 transition"
+              class="px-4 py-2 bg-red-600 text-white rounded-lg uppercase text-xs md:text-sm hover:bg-red-700 transition"
               @click="removeCustomSectionItem(i, leftColumnList)"
             >
               REMOVE SECTION
@@ -310,7 +322,7 @@ const { emptyFields } = useCVState()
               />
             </ClientOnly>
             <button
-              class="w-full px-4 py-2 bg-red-600 text-white rounded-lg uppercase text-xs md:text-sm hover:bg-red-700 transition"
+              class="px-4 py-2 bg-red-600 text-white rounded-lg uppercase text-xs md:text-sm hover:bg-red-700 transition"
               @click="removeCustomSectionItem(i, customSectionList)"
             >
               REMOVE SECTION

@@ -142,7 +142,7 @@ function goBack() {
         <DownloadPDF class="text-xs md:text-base sm:text-sm" :el="el" />
         <div>
           <button
-            class="flex justify-center items-center md:gap-3 gap-1 px-3 md:px-6 md:py-2 py-1 rounded-xl bg-gradient-to-r from-red-500 to-red-700 hover:from-red-600 hover:to-red-800 text-white shadow transition"
+            class="flex justify-center items-center md:gap-3 gap-1 px-3 md:px-6 md:py-2 py-1 rounded-xl bg-gray-800 hover:bg-gray-900 active:bg-gray-900 text-white shadow transition"
             @click="resetSettings(resetResume, template, isCustomTemplate)"
           >
             <span

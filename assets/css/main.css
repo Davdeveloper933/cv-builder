@@ -22,7 +22,7 @@ body {
 }
 
 body {
-  background:white;
+  background:#eff6ff;
 }
 
 ul {
@@ -62,7 +62,7 @@ input[type='date']{
 
   .custom-template ul li::marker {
     z-index: -1;
-    color: transparent !important;
+    color: var(--primary) !important;
     font-size: 0;
   }
   .custom-template ul li::before {

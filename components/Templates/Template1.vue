@@ -6,7 +6,7 @@
     <div
       class="grid grid-cols-3 max-w-[793px] min-h-[1122px] overflow-hidden max-h-[1122px]"
     >
-      <!-- Sidebar -->
+      <!-- Sidebar bg-[#222A35] -->
       <div class="bg-[#222A35] col-span-1 text-white p-6 space-y-6">
         <div class="flex justify-center">
           <img

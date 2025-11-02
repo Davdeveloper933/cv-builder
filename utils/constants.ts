@@ -1,5 +1,4 @@
 import type { Template } from '~/types'
-import Template1 from '~/components/Templates/Template1.vue'
 import {
   resumeTemplate1,
   resumeTemplate2,
@@ -8,6 +7,7 @@ import {
 import Template2 from '~/components/Templates/Template2.vue'
 import Template3 from '~/components/Templates/Template3.vue'
 import type { EditorFields } from '~/types/editor'
+import Template1 from '~/components/Templates/Template1.vue'
 
 export const CHECKBOX_ITEMS = [
   { value: 'languages', label: 'Languages' },
@@ -33,38 +33,38 @@ export const TEMPLATES: Array<Template> = [
     name: 'Template 1',
     component: Template1,
     data: resumeTemplate1,
-    img: '/images/tmpl1.png',
+    img: '/images/templates/tmpl1.png',
   },
   {
     name: 'Template 2',
     component: Template2,
     data: resumeTemplate2,
-    img: '/images/tmpl3.png',
+    img: '/images/templates/tmpl3.png',
   },
 
   {
     name: 'Template 3',
     component: Template3,
     data: resumeTemplate3,
-    img: '/images/tmpl2.png',
+    img: '/images/templates/tmpl2.png',
   },
   {
     name: 'Template 3',
     component: Template3,
     data: resumeTemplate3,
-    img: '/images/tmpl2.png',
+    img: '/images/templates/tmpl2.png',
   },
   {
     name: 'Template 1',
     component: Template1,
     data: resumeTemplate1,
-    img: '/images/tmpl1.png',
+    img: '/images/templates/tmpl1.png',
   },
   {
     name: 'Template 2',
     component: Template2,
     data: resumeTemplate2,
-    img: '/images/tmpl3.png',
+    img: '/images/templates/tmpl3.png',
   },
 ]
 
@@ -73,7 +73,7 @@ export const emptySectionFields: EditorFields = {
     id: 0,
     title: 'Your title',
     dates: {
-      start: new Date('feb 2014'),
+      start: 'feb 2014',
       end: new Date('jan 2018'),
       current: false,
     },
@@ -83,7 +83,7 @@ export const emptySectionFields: EditorFields = {
     id: 0,
     title: 'Your title',
     dates: {
-      start: new Date('feb 2014'),
+      start: 'feb 2014',
       end: new Date('jan 2018'),
       current: false,
     },
@@ -96,7 +96,7 @@ export const emptySectionFields: EditorFields = {
     title: 'Custom Section',
     description: '',
     dates: {
-      start: new Date('feb 2014'),
+      start: 'feb 2014',
       end: new Date('jan 2018'),
       current: false,
     },

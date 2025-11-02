@@ -4,7 +4,7 @@ import { useCVState } from '~/data/useCVState'
 
 const { push } = useHistory()
 const { current } = useCVState()
-const props = defineProps<{ label: string }>()
+const props = defineProps<{ label: string; makeEditable: boolean }>()
 const emit = defineEmits<{ (e: 'update:label', value: string): void }>()
 
 const { toggleEdit, isEditing } = useEditor()
@@ -40,6 +40,7 @@ const onInput = (e: Event) => {
       {{ props.label }}
     </h3>
     <button
+      v-if="makeEditable"
       @click="toggleEdit"
       class="text-gray-500 hover:text-black transition"
     >

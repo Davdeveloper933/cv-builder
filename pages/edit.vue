@@ -13,7 +13,8 @@
           :reset="resetResume"
         />
       </div>
-      <div class="hidden md:col-span-1 md:block">
+      <!--      вернуть-->
+      <div id="#cv" class="hidden md:col-span-1 md:block">
         <div class="border-gray-800">
           <div class="md:origin-top lg:scale-[.7] xl:scale-[1] md:scale-[.5]">
             <div ref="cvref">

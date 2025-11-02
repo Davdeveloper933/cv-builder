@@ -61,7 +61,11 @@ const { onImageChange } = useEditor()
         </div>
       </div>
     </div>
-    <button v-if="isCustomTemplate" @click="resumeData.profileImage = ''">
+    <button
+      class="mt-2"
+      v-if="isCustomTemplate"
+      @click="resumeData.profileImage = ''"
+    >
       Clear profile image
     </button>
   </div>
