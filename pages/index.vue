@@ -1,6 +1,6 @@
 <template>
   <section>
-    <div class="flex justify-center flex-col items-center">
+    <div class="flex justify-center flex-col mt-4 items-center">
       <h1 class="font-bold text-center max-w-2xl text-2xl">
         Build a Standout
         <span class="text-[#0A65AD] font-bold">CV</span> Instantly
