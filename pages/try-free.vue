@@ -48,8 +48,8 @@
 <script lang="ts" setup>
 import { useCustomTemplatePicker } from '~/composables/useCVTemplate'
 
-import cvTemplatePngSrc from './images/cv-template.png'
-import cvPngSrc from './images/cv.png'
+import cvTemplatePngSrc from '~/public/images/cv-template.png'
+import cvPngSrc from '~/public/images/cv.png'
 
 const route = useRoute()
 const isCustomTemplate = computed(() => route.fullPath === '/edit-custom')
