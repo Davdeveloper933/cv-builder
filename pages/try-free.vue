@@ -14,7 +14,7 @@
           <div class="flex space-y-2 flex-col items-center text-center">
             <!--            иконка-->
             <div>
-              <img class="max-w-20" src="/images/cv.png" alt="" />
+              <img class="max-w-20" :src="cvPngSrc" alt="" />
             </div>
             <h2 class="text-xl font-semibold capitalize">
               Build Resume from Scratch
@@ -32,7 +32,7 @@
           <div class="flex space-y-2 flex-col items-center text-center">
             <!--            иконка-->
             <div>
-              <img class="max-w-20" src="/images/cv-template.png" alt="" />
+              <img class="max-w-20" :src="cvTemplatePngSrc" alt="" />
             </div>
             <h2 class="text-xl font-semibold capitalize">Choose template</h2>
             <p class="text-gray-500 text-sm">
@@ -47,6 +47,9 @@
 
 <script lang="ts" setup>
 import { useCustomTemplatePicker } from '~/composables/useCVTemplate'
+
+import cvTemplatePngSrc from './images/cv-template.png'
+import cvPngSrc from './images/cv.png'
 
 const route = useRoute()
 const isCustomTemplate = computed(() => route.fullPath === '/edit-custom')
