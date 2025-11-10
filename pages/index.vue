@@ -31,8 +31,6 @@
   </section>
 </template>
 
-<script lang="ts" setup>
-import LandingHeroImage from '~/components/LandingHeroImage.vue'
-</script>
+<script lang="ts" setup></script>
 
 <style></style>

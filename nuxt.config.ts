@@ -1,5 +1,11 @@
 export default defineNuxtConfig({
   ssr: false,
+  routeRules: {
+    '/': { prerender: true },
+  },
+  experimental: {
+    payloadExtraction: false,
+  },
   alias: {
     assets: '/<rootDir>/assets',
   },

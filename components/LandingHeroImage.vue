@@ -1,8 +1,8 @@
 <script lang="ts" setup>
 const IMAGES = [
-  '/images/templates/tmpl1.png',
-  '/images/templates/tmpl2.png',
-  '/images/templates/tmpl3.png',
+  './images/templates/tmpl1.png',
+  './images/templates/tmpl2.png',
+  './images/templates/tmpl3.png',
 ]
 </script>
 
